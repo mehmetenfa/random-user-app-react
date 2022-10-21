@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import mailSvg from "./assets/mail.svg";
 import manSvg from "./assets/man.svg";
@@ -10,12 +10,16 @@ import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
 import Footer from "./components/footer/Footer";
+
 const url = "https://randomuser.me/api/";
 const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
+
 function App() {
   const [userData, setUserData] = useState(null);
   const [userInfo, setUserInfo] = useState([]);
   const [addUserInfo, setAddUserInfo] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+
   const getRandomUser = async () => {
     await axios
       .get(url)
@@ -26,18 +30,21 @@ function App() {
           title: "My name is",
           info: `${res.data.results[0].name.first} ${res.data.results[0].name.last}`,
         });
+        setIsClicked(false);
       })
       .catch((err) => console.log(err));
   };
+
   useEffect(() => {
     getRandomUser();
   }, []);
-  //get info Section
+
+  // Get Info Section
   const getInfo = (hover) => {
     switch (hover) {
       case "profile":
         setUserInfo({
-          title: "My name is ",
+          title: "My name is",
           info: `${userData.name.first} ${userData.name.last}`,
         });
         break;
@@ -75,9 +82,20 @@ function App() {
         break;
     }
   };
-  //Get info section is done
-  // Add User INFO
-  // Add User INFO done
+  // Get Info Section is Done
+
+  // Add User Info
+  const handleAddUser = (name) => {
+    const newUser = {
+      firstName: userData.name.first,
+      email: userData.email,
+      tel: userData.phone,
+      age: userData.dob.age,
+    };
+    setAddUserInfo([...addUserInfo, newUser]);
+    setIsClicked(true);
+  };
+  // Add User Info is done
   return (
     <main>
       {userData && (
@@ -85,15 +103,18 @@ function App() {
           <div className="block bcg-orange">
             <img src={cwSvg} alt="cw" id="cw" />
           </div>
+          {/*  */}
           <div className="block">
             <div className="container">
               <img
-                src={userData.picture.large}
+                src={
+                  userData.picture.large ? userData.picture.large : defaultImage
+                }
                 alt="random user"
                 className="user-img"
               />
               <p className="user-title">
-                {userInfo !== [] ? userInfo.title : "My name is"}
+                {userInfo !== [] ? userInfo.title : `My name is`}
               </p>
               <p className="user-value">
                 {userInfo !== []
@@ -106,7 +127,11 @@ function App() {
                   data-label="name"
                   onMouseEnter={() => getInfo("profile")}
                 >
-                  <img src={womanSvg} alt="user" id="iconImg" />
+                  <img
+                    src={userData.gender === "female" ? womanSvg : manSvg}
+                    alt="user"
+                    id="iconImg"
+                  />
                 </button>
                 <button
                   className="icon"
@@ -120,7 +145,7 @@ function App() {
                   data-label="age"
                   onMouseEnter={() => getInfo("age")}
                 >
-                  <img src={womanAgeSvg} alt="age" id="iconImg" />
+                  <img src={userData.gender === "female" ? womanAgeSvg : manAgeSvg} alt="age" id="iconImg" />
                 </button>
                 <button
                   className="icon"
@@ -152,10 +177,16 @@ function App() {
                 >
                   new user
                 </button>
-                <button className="btn" type="button">
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => handleAddUser(userData.name.first)}
+                  disabled={isClicked && "disabled"}
+                >
                   add user
                 </button>
               </div>
+
               <table className="table">
                 <thead>
                   <tr className="head-tr">
@@ -166,18 +197,20 @@ function App() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="body-tr">
-                    {addUserInfo === [] ? (
-                      <>
-                        <th className="th">Firstname</th>
-                        <th className="th">Email</th>
-                        <th className="th">Phone</th>
-                        <th className="th">Age</th>
-                      </>
-                    ) : (
-                      ""
-                    )}
-                  </tr>
+                  {addUserInfo === [] ? (
+                    ""
+                  ) : (
+                    <>
+                      {addUserInfo.map((item, idx) => (
+                        <tr className="body-tr" key={idx}>
+                          <th className="th">{item.firstName}</th>
+                          <th className="th">{item.email}</th>
+                          <th className="th">{item.tel}</th>
+                          <th className="th">{item.age}</th>
+                        </tr>
+                      ))}
+                    </>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -190,4 +223,5 @@ function App() {
     </main>
   );
 }
+
 export default App;
