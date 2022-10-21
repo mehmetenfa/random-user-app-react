@@ -1,41 +1,43 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import mailSvg from "./assets/mail.svg";
+import manSvg from "./assets/man.svg";
 import womanSvg from "./assets/woman.svg";
+import manAgeSvg from "./assets/growing-up-man.svg";
 import womanAgeSvg from "./assets/growing-up-woman.svg";
 import mapSvg from "./assets/map.svg";
 import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
 import Footer from "./components/footer/Footer";
-
 const url = "https://randomuser.me/api/";
 const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
-
 function App() {
   const [userData, setUserData] = useState(null);
   const [userInfo, setUserInfo] = useState([]);
-
+  const [addUserInfo, setAddUserInfo] = useState([]);
   const getRandomUser = async () => {
     await axios
       .get(url)
       .then((res) => {
         console.log(res.data.results[0]);
         setUserData(res.data.results[0]);
+        setUserInfo({
+          title: "My name is",
+          info: `${res.data.results[0].name.first} ${res.data.results[0].name.last}`,
+        });
       })
       .catch((err) => console.log(err));
   };
-
   useEffect(() => {
     getRandomUser();
   }, []);
-
-  // Get Info Section
+  //get info Section
   const getInfo = (hover) => {
     switch (hover) {
       case "profile":
         setUserInfo({
-          title: "My name is",
+          title: "My name is ",
           info: `${userData.name.first} ${userData.name.last}`,
         });
         break;
@@ -54,12 +56,12 @@ function App() {
       case "location":
         setUserInfo({
           title: "My location is",
-          info: `${userData.location.city} ${userData.location.country}`,
+          info: `${userData.location.city} - ${userData.location.country}`,
         });
         break;
       case "tel":
         setUserInfo({
-          title: "My phone is",
+          title: "My phone number is",
           info: userData.phone,
         });
         break;
@@ -73,7 +75,9 @@ function App() {
         break;
     }
   };
-  // Get Info Section is Done
+  //Get info section is done
+  // Add User INFO
+  // Add User INFO done
   return (
     <main>
       {userData && (
@@ -81,13 +85,10 @@ function App() {
           <div className="block bcg-orange">
             <img src={cwSvg} alt="cw" id="cw" />
           </div>
-          {/*  */}
           <div className="block">
             <div className="container">
               <img
-                src={
-                  userData.picture.large ? userData.picture.large : defaultImage
-                }
+                src={userData.picture.large}
                 alt="random user"
                 className="user-img"
               />
@@ -97,7 +98,7 @@ function App() {
               <p className="user-value">
                 {userInfo !== []
                   ? userInfo.info
-                  : `${userData.name.first} ${userData.name.first}`}
+                  : `${userData.name.first} ${userData.name.last}`}
               </p>
               <div className="values-list">
                 <button
@@ -155,7 +156,6 @@ function App() {
                   add user
                 </button>
               </div>
-
               <table className="table">
                 <thead>
                   <tr className="head-tr">
@@ -166,7 +166,18 @@ function App() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="body-tr"></tr>
+                  <tr className="body-tr">
+                    {addUserInfo === [] ? (
+                      <>
+                        <th className="th">Firstname</th>
+                        <th className="th">Email</th>
+                        <th className="th">Phone</th>
+                        <th className="th">Age</th>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -179,5 +190,4 @@ function App() {
     </main>
   );
 }
-
 export default App;
