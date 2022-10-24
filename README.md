@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Random User App 2 
 
 
@@ -98,3 +99,7 @@ Build a Random User App using ReactJS.
 - You can add additional functionalities and design to your app.
 
 **<p align="center">&#9786; Happy Coding &#9997;</p>**
+=======
+# react-random-user-app
+Random User App with React
+>>>>>>> ec9c19f7db00b2de5d139bcba8f872502f0691bd
