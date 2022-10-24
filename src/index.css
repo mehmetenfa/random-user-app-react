@@ -102,7 +102,7 @@ p {
 }
 
 .btn:hover {
-  color: var(--clr-grey-1);
+  color: #fff;
   background: var(--clr-orange-cw);
   border-color: var(--clr-orange-cw);
   transform: scale(96%);
