@@ -1,4 +1,4 @@
-Random User App 2 
+# Random User App 🚀
 
 
   Project Name       |Libraries and Technologies I use     |How does my project look   
@@ -6,28 +6,18 @@ Random User App 2
 [Random_user_app](https://react-random-user-app.vercel.app/)| Js React | ![Random_user_app](userapp.gif)
 
 
+## Tools I used while doing the project
 
-I used;
-
-Components
-
-useState
-
-useEffect
-
-axios
-
-import/export
-
-Props
-
-React Developer Tool
-
-Destructuring props
-
-array map method
-
-array some method
+- React Components
+- React useState
+- React useEffect
+- React axios
+- React import/export
+- React Props
+- React React Developer Tool
+- React Destructuring props
+- JavaScrip array map method
+- JavaScript array some method
 
 ## Description
 
@@ -97,4 +87,4 @@ Build a Random User App using ReactJS.
 
 - You can add additional functionalities and design to your app.
 
-**<p align="center">&#9786; Happy Coding &#9997;</p>**
+
