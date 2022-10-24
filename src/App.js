@@ -9,7 +9,6 @@ import mapSvg from "./assets/map.svg";
 import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
-import Footer from "./components/footer/Footer";
 
 const url = "https://randomuser.me/api/";
 const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
@@ -101,7 +100,7 @@ function App() {
       {userData && (
         <>
           <div className="block bcg-orange">
-            <img src={cwSvg} alt="cw" id="cw" />
+            <img alt="" id="cw" />
           </div>
           {/*  */}
           <div className="block">
@@ -145,7 +144,11 @@ function App() {
                   data-label="age"
                   onMouseEnter={() => getInfo("age")}
                 >
-                  <img src={userData.gender === "female" ? womanAgeSvg : manAgeSvg} alt="age" id="iconImg" />
+                  <img
+                    src={userData.gender === "female" ? womanAgeSvg : manAgeSvg}
+                    alt="age"
+                    id="iconImg"
+                  />
                 </button>
                 <button
                   className="icon"
@@ -214,9 +217,6 @@ function App() {
                 </tbody>
               </table>
             </div>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Footer />
           </div>
         </>
       )}

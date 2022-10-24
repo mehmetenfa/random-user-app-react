@@ -29,14 +29,14 @@ Variables
   --clr-grey-7: hsl(211, 27%, 70%);
   --clr-grey-8: hsl(210, 31%, 80%);
   --clr-grey-9: hsl(212, 33%, 89%);
-  --clr-grey-10: hsl(210, 36%, 96%);
+  --clr-grey-10: hsl(211, 36%, 96%);
   --clr-white: #fff;
   --clr-red-dark: hsl(360, 67%, 44%);
   --clr-red-light: hsl(360, 71%, 66%);
   --clr-green-dark: hsl(125, 67%, 44%);
   --clr-green-light: hsl(125, 71%, 66%);
-  --clr-orange-cw: hsl(39, 100%, 69%);
-  --clr-purple-cw: hsl(313, 34%, 46%);
+  --clr-orange-cw: linear-gradient(to right, #020024, #00d4ff);
+  --clr-purple-cw: #000000;
   --clr-black: #222;
   --transition: all 0.3s linear;
   --spacing: 0.1rem;
@@ -105,6 +105,7 @@ p {
   color: var(--clr-grey-1);
   background: var(--clr-orange-cw);
   border-color: var(--clr-orange-cw);
+  transform: scale(96%);
 }
 
 /* container */
@@ -191,6 +192,10 @@ p {
   height: 50px;
 }
 
+#iconImg:hover {
+  transform: scale(94%);
+}
+
 #cw {
   width: 75px;
   margin-top: 50px;
@@ -205,9 +210,9 @@ p {
 }
 
 .head-tr {
-  background-color: hsl(39, 100%, 69%);
+  background: linear-gradient(to right, #020024, #00d4ff);
   height: 40px;
-  color: #9e4d8d;
+  color: #fff;
 }
 
 .table {
